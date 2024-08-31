@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Extract_Zeiss_Results")]
+[assembly: AssemblyTitle("Extract_Results")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BorgWarner")]
-[assembly: AssemblyProduct("Extract_Zeiss_Results")]
+[assembly: AssemblyProduct("Extract_Results")]
 [assembly: AssemblyCopyright("Copyright © BorgWarner 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
