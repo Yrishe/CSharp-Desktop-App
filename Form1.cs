@@ -27,8 +27,8 @@ namespace Extract_Zeiss_Results
         private readonly Dictionary<CheckBox, string> checkboxes = new Dictionary<CheckBox, string>();
 
         // Define the pre-defined paths
-        private const string predefinedSourcePath = @"\\uksto-sr1996\C$\Users\Public\Documents\Zeiss\CALYPSO\workarea\results\"; // Change to your default source folder
-        private const string predefinedTargetPath = @"I:\Metrology_Lab_MSE_Requests\Results\"; // Change to your default target folder
+        private const string predefinedSourcePath = @"\\Public\Documents\results\"; // Change to your default source folder
+        private const string predefinedTargetPath = @"I:\Results_Final\"; // Change to your default target folder
 
         public ZRCompiler()
         {
@@ -343,7 +343,7 @@ namespace Extract_Zeiss_Results
             string resultsFolder = Path.Combine(targetDir, "CHRs");
 
             // Check if the user has provided an additional file path, otherwise use a default
-            string predefinedPath = @"I:\Quality\Metrology Lab\PROGRAMS\Live\ZEISS\CMM_Data_Compiler_AutoRun.xlsm";  // Modify with actual file path
+            string predefinedPath = @"I:\Compiler_AutoRun.xlsm";  // Modify with actual file path
             //string additionalFilePath = string.IsNullOrEmpty(txtAdditionalFilePath.Text) ? predefinedPath : txtAdditionalFilePath.Text;
 
             // Ensure the results directory exists
