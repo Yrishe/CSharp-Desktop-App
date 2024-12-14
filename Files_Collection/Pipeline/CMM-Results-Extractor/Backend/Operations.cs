@@ -148,7 +148,7 @@ namespace Extract_Zeiss_Results.Backend
 
             // Default macro path
             string masterMacro = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Macro\CMM_Data_Compiler_Date_AutoRun.xlsm");
-            string backupMasterMacro = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"I:\Quality\Metrology Lab\MACHINES\Gauges\Zeiss\Tools\DataCompiler\CMM_Data_Compiler_Date_AutoRun.xlsm");
+            string backupMasterMacro = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Gauges\Tools\DataCompiler\CMM_Data_Compiler_Date_AutoRun.xlsm");
 
 
             string macroFileName = Path.GetFileName(masterMacro);
@@ -220,7 +220,7 @@ namespace Extract_Zeiss_Results.Backend
                 try
                 {
                     // Define parth to macro folder
-                    string macroTargetFolder = @"I:\Metrology_Lab_MSE_Requests\Results\TN741\Results\Excel_Files\Macro_Files_Waiting";
+                    string macroTargetFolder = @"C:\Results\Excel_Files\Macro_Files_Waiting";
                     //string macroTargetFolder = @"I:\Quality\Metrology Lab\PEOPLE\2. Engineering\Yarli\Test\Checking\macro";
 
                     //MessageBox.Show($"getPath from OpenExcelAndRunMacro = {getPath}");
