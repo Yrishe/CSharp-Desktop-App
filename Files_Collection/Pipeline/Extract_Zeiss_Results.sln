@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract_Zeiss_Results", "CMM-Results-Extractor\Extract_Zeiss_Results.csproj", "{EDA4EC21-DFB6-49A7-9685-6FF2F89541F0}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "App Manager", "App Manager\App Manager.vdproj", "{F23D2447-A8AF-4D54-BE6C-659FBD1DE60C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDA4EC21-DFB6-49A7-9685-6FF2F89541F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA4EC21-DFB6-49A7-9685-6FF2F89541F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA4EC21-DFB6-49A7-9685-6FF2F89541F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA4EC21-DFB6-49A7-9685-6FF2F89541F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F23D2447-A8AF-4D54-BE6C-659FBD1DE60C}.Debug|Any CPU.ActiveCfg = Debug
+		{F23D2447-A8AF-4D54-BE6C-659FBD1DE60C}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6189B4B-DB1E-4A9A-A5A3-5C1D8EAEEC73}
+	EndGlobalSection
+EndGlobal

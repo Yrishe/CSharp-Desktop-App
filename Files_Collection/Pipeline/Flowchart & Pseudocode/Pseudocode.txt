@@ -1,0 +1,233 @@
+ZRCompiler{
+
+	//create predefined paths
+	sourcePath = ""
+	targetPath = ""
+
+	btnClick(sender, evendHandler){
+		
+		//Trim user input if available
+		sourceDirectory = getUserInput
+		targetDirectory = getUserInput
+
+		//Get current date
+		currentDate = DateNow
+
+		//Conditions to check if user has provided paths
+		if(sourceDirectory is empty)
+			sourceDirectory = sourcePath
+		if(targetDirectory is empty)
+			targetDirectory = targetPath
+
+		//Create backup and Results directory 
+		createDir if does not exist
+			results = ""
+			backup = ""
+
+		//Create a new directory with the current date inside backup and results folders
+		createDir if does not exist		
+			resultThisDate
+			backResultThisDate			
+
+		//flag to confirm files transfer
+		stateFileCopy = false
+
+		try{
+			//Check each element from the selective boxes in UI, only consider if box is active 
+			forEach(box in checkBoxes)
+				if(box is checked AND is different of "Process Data")
+					//Combine source, target and backup paths with the checked box to build a temp path
+					specificSourceDir = Combine(sourceDir, box)
+                        				specificTargetDir = Combine(resultsThisDate, box)
+                        				specificBackupDir = Combine(backResultThisDate, box)
+					
+					if(specificSourceDir exists AND specificTargetDir is empty)
+						//create a new folder in specificTargetDir and specificBackupDir to track the changes
+
+					//Get files from specificSourceDir
+					filesFromZeiss = GetFilesFromZeiss(specificSourceDir)
+					
+					if(filesFromZeiss length > 0)
+						forEach(file)
+							//Combine paths to create a temp dir
+							sourceFile = Combine(specificSourceDir, file)
+							destinationFile = Combine(specificTargetDir, file)
+
+                                					//Copy files over to task folder
+                            						Copy(sourceFile, destinationFile, true)
+                                					stateFileCopy = true
+
+                                					//********************************************
+                                					//Move files into backup folder
+                                					backupFile = Combine(specificBackupDir, file)
+                                					Move(sourceFile, backupFile)
+                                					//********************************************	
+
+						 	//Output operation status
+                            						if (!stateFileCopy) 
+                                						if (filesFromZeiss.Count == 0)
+									Output("Files")
+                        				else
+						//Ouput if file is empty
+						Output("No files from {currentDate} to {currentDate} to copy in {box}.")
+			
+			//If files transferred and "Process Data" check box selected call macro
+               			if (stateFileCopy AND box == "Process Data")
+				Process_Data(resultThisDate)
+
+            		catch (Exception ex)
+           			Show("An error occurred: " + ex.Message);
+	}
+
+        GetFilesFromZeiss(directory){
+	//Get directory information
+	DirectoryInfo directoryInfo = new DirectoryInfo(directory);
+	
+	 //Check if dir exists
+	if (!directoryInfo.Exists)
+               		Show($"The directory {directory} does not exist.");
+		 // Return an empty list to avoid further processing.
+			return list = ""
+
+            //Check if files exists and collect them
+           files = directoryInfo.GetFiles()
+            if (files Length == 0)
+	Show($"Directory is empty");
+                return list = ""
+
+            // List existing files
+            return list = files
+        }
+
+        Process_Data(targetDir)
+        {
+            	//Combine path to create tmp directory
+	resultsFolder = Path.Combine(targetDir, "CHRs")
+
+ 	//Date to be used on Macro naming
+            	currentDate = DateNow
+
+            // Default macro path
+           predefinedPath = @"I:\Quality\Metrology Lab\MACHINES\Gauges\Zeiss\Tools\DataCompiler\CMM_Data_Compiler_Date_AutoRun.xlsm"
+
+            //Rename Macro with current date *********************************
+            newpredefinedPath = @"I:\Quality\Metrology Lab\MACHINES\Gauges\Zeiss\Tools\DataCompiler\" + currentDate+".xlsm"
+
+            //Get files name 
+            fileName = Path.GetFileName(newpredefinedPath)
+
+            try {
+                if (File.Exists(predefinedPath))
+                    Copy(predefinedPath, newpredefinedPath, overwrite:true)
+                    Output("Macro Renamed!")
+                else 
+                    Output("Failed to rename Macro!")
+  
+            catch (Exception ex)
+                Show("An error occurred: {ex.Message}")
+
+            //*********************************************************
+            // Define the destination path for the additional file
+            destinationPath = Path.Combine(resultsFolder, fileName)
+
+            readyMacroPath = @"I:\Metrology_Lab_MSE_Requests\Results\TN741\Results\Excel_Files\Macro_Files_Waiting"
+
+            try
+            {
+                // Copy the additional file to the results directory
+                Copy(newpredefinedPath, destinationPath, true)
+
+                // Add delay to ensure the previous process is completed
+                await Task.Delay(1000)
+
+                // Open the copied Excel file and run a macro
+                OpenExcelAndRunMacro(destinationPath, fileName, "Click this button") // Replace "MacroName" with your actual macro name
+
+                // Add delay to ensure the previous process is completed
+                await Task.Delay(1000)
+
+            catch (Exception ex)
+                 Show("Failed to copy additional file: {ex.Message}")
+
+            //Once completed move macro to specific dir
+            finalMacro = GetFileName(destinationPath)
+            readyMacroTarget = Combine(readyMacroPath, finalMacro)
+
+            if (!File.Exists(readyMacroTarget))
+                File.Move(destinationPath, readyMacroTarget);
+
+            //Delete temp file
+           Delete(newpredefinedPath)
+        }
+
+        MoveFileOneLevelUp(sourcePath, string targetDir)
+        {
+            string fileName = GetFileName(sourcePath)
+            string newLocation = Path.Combine(targetDir, fileName)
+
+            if (File.Exists(newLocation))
+	// Ensure there is no conflict with existing files
+                File.Delete(newLocation)
+
+            File.Move(sourcePath, newLocation)
+            Console.WriteLine("File moved to {newLocation}")
+        }
+
+        public async void OpenExcelAndRunMacro(filePath, macroName, buttonName)
+        {
+            await Task.Delay(10)
+                Excel.Application excelApp = new Excel.Application()
+                try
+                {
+	   // Set the Excel application to be visible
+                    excelApp.Visible = true
+
+                    // Open the Excel file
+                    Excel.Workbook workbook = excelApp.Workbooks.Open(filePath)
+                    Excel.Worksheet worksheet = workbook.Sheets[1]
+
+                    // Save and close the workbook
+                    workbook.Save()
+                    workbook.Close(true)
+                }
+                catch (Exception ex)
+                {
+                    Output("An error occurred: {ex.Message}")
+                }
+                finally
+                {
+                    // Release COM objects to fully kill Excel process from running in the background
+                    if (excelApp != null)
+                        excelApp.Quit()
+                        Marshal.ReleaseComObject(excelApp)
+                }
+        }
+
+        CheckBox(sender, eventHandler)
+        {
+            // Event handler for checkbox state change
+            if(sender is CheckBox)
+                Console.WriteLine("CheckBox::Checked");
+        }
+
+        //Progress bar
+        async Task ProcessCMMResultsAsync()
+        {
+            progressBar1.Value = 0
+
+            // Total number of steps for processing
+            int totalSteps = 100 
+
+            for (int i = 0; i <= totalSteps; i++)
+            {
+	// Replace with actual processing logic
+                await Task.Delay(90)
+
+                // Update the progress bar
+                progressBar1.Value = i
+                percent.Text = progressBar1.Value.ToString() + "%"
+            }
+            Progress.Text = "Operations Completed!"
+        }
+    }
+}
