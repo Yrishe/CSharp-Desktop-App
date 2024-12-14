@@ -108,10 +108,10 @@ ZRCompiler{
             	currentDate = DateNow
 
             // Default macro path
-           predefinedPath = @"I:\Quality\Metrology Lab\MACHINES\Gauges\Zeiss\Tools\DataCompiler\CMM_Data_Compiler_Date_AutoRun.xlsm"
+           predefinedPath = @"C:\Gauges\Tools\DataCompiler\CMM_Data_Compiler_Date_AutoRun.xlsm"
 
             //Rename Macro with current date *********************************
-            newpredefinedPath = @"I:\Quality\Metrology Lab\MACHINES\Gauges\Zeiss\Tools\DataCompiler\" + currentDate+".xlsm"
+            newpredefinedPath = @"C:\Gauges\Zeiss\Tools\DataCompiler\" + currentDate+".xlsm"
 
             //Get files name 
             fileName = Path.GetFileName(newpredefinedPath)
@@ -130,7 +130,7 @@ ZRCompiler{
             // Define the destination path for the additional file
             destinationPath = Path.Combine(resultsFolder, fileName)
 
-            readyMacroPath = @"I:\Metrology_Lab_MSE_Requests\Results\TN741\Results\Excel_Files\Macro_Files_Waiting"
+            readyMacroPath = @"C:\Results\Excel_Files\Macro_Files_Waiting"
 
             try
             {
