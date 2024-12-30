@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using Extract_Zeiss_Results.Backend;
+using Extract_Mc_Results.Backend;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Security.AccessControl;
 
 
-namespace Extract_Zeiss_Results.Frontend
+namespace Extract_Mc_Results.Frontend
 {
     public partial class View : Form
     {
@@ -28,8 +28,8 @@ namespace Extract_Zeiss_Results.Frontend
         private readonly List<string> checkedBox = new List<string>();
 
         // Define the pre-defined paths
-        private const string defaultSourcePath = @"\\uksto-sr1996\C$\Users\Public\Documents\Zeiss\CALYPSO\workarea\results\F3E_PI-NPI_Assy_ConicalCap_TN741"; // Change to your default source folder
-        private const string defaultTargetPath = @"\\uksto-lfp01.sdi.europe.delphiauto.net\Depts\Metrology_Lab_MSE_Requests\Results\TN741"; // Change to your default target folder
+        private const string defaultSourcePath = @"\\Public\Mc\work\results\741"; // Change to your default source folder
+        private const string defaultTargetPath = @"\\Depts\Requests\Results\741"; // Change to your default target folder
 
         // TEST ONLY
         //private const string defaultSourcePath = @"I:\Quality\Metrology Lab\PEOPLE\2. Engineering\Yarli\Test\test1\Results"; // Change to your default source folder
