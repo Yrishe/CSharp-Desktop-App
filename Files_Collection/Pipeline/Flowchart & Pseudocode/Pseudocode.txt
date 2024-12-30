@@ -45,9 +45,9 @@ ZRCompiler{
 						//create a new folder in specificTargetDir and specificBackupDir to track the changes
 
 					//Get files from specificSourceDir
-					filesFromZeiss = GetFilesFromZeiss(specificSourceDir)
+					filesFromMc = GetFilesFromMc(specificSourceDir)
 					
-					if(filesFromZeiss length > 0)
+					if(filesFromMc length > 0)
 						forEach(file)
 							//Combine paths to create a temp dir
 							sourceFile = Combine(specificSourceDir, file)
@@ -65,7 +65,7 @@ ZRCompiler{
 
 						 	//Output operation status
                             						if (!stateFileCopy) 
-                                						if (filesFromZeiss.Count == 0)
+                                						if (filesFromMc.Count == 0)
 									Output("Files")
                         				else
 						//Ouput if file is empty
@@ -79,7 +79,7 @@ ZRCompiler{
            			Show("An error occurred: " + ex.Message);
 	}
 
-        GetFilesFromZeiss(directory){
+        GetFilesFromMc(directory){
 	//Get directory information
 	DirectoryInfo directoryInfo = new DirectoryInfo(directory);
 	
@@ -111,7 +111,7 @@ ZRCompiler{
            predefinedPath = @"C:\Gauges\Tools\DataCompiler\CMM_Data_Compiler_Date_AutoRun.xlsm"
 
             //Rename Macro with current date *********************************
-            newpredefinedPath = @"C:\Gauges\Zeiss\Tools\DataCompiler\" + currentDate+".xlsm"
+            newpredefinedPath = @"C:\Gauges\Mc\Tools\DataCompiler\" + currentDate+".xlsm"
 
             //Get files name 
             fileName = Path.GetFileName(newpredefinedPath)
