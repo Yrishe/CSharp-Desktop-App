@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace Extract_Zeiss_Results.Backend
+namespace Extract_Mc_Results.Backend
 {
     internal class Operations
     {
@@ -63,12 +63,12 @@ namespace Extract_Zeiss_Results.Backend
                             Directory.CreateDirectory(specificBackupDir);
                         }
 
-                        var filesFromZeiss = GetFilesFromZeiss(specificSourceDir);
+                        var filesFromMc = GetFilesFromMc(specificSourceDir);
 
-                        if (filesFromZeiss.Count > 0)
+                        if (filesFromMc.Count > 0)
                         {
                             //foreach (var file in filesFromDateRange)
-                            foreach (var file in filesFromZeiss)
+                            foreach (var file in filesFromMc)
                             {
                                 string sourceFile = Path.Combine(specificSourceDir, file);
                                 string destinationFile = Path.Combine(specificTargetDir, file);
@@ -96,7 +96,7 @@ namespace Extract_Zeiss_Results.Backend
                             /* DELETE THE FILES FROM MAIN DIR IN CMM ONCE OPERATIONS HAVE BEEN COMPLETED */
                             if (!stateFileCopy)
                             {
-                                if (filesFromZeiss.Count == 0) { Console.WriteLine("Files"); }
+                                if (filesFromMc.Count == 0) { Console.WriteLine("Files"); }
                             }
 
                         }
@@ -117,7 +117,7 @@ namespace Extract_Zeiss_Results.Backend
             }
         }
 
-        private List<string> GetFilesFromZeiss(string directory)
+        private List<string> GetFilesFromMc(string directory)
         {
 
             DirectoryInfo directoryInfo = new DirectoryInfo(directory);
