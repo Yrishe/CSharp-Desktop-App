@@ -1,4 +1,4 @@
-﻿namespace Extract_Zeiss_Results.Frontend
+﻿namespace Extract_Mc_Results.Frontend
 {
     partial class View
     {
@@ -234,8 +234,7 @@
             // 
             // folderBrowserDialog1
             // 
-            this.folderBrowserDialog1.SelectedPath = "\"\\\\uksto-sr1996\\C$\\Users\\Public\\Documents\\Zeiss\\CALYPSO\\workarea\\results\\F3E_PI-N" +
-    "PI_Assy_ConicalCap_TN741\"";
+            this.folderBrowserDialog1.SelectedPath = "\"\\\\Public\\Documents\\Mc\\CAL\\work\\results\\-N" + "PI\"";
             // 
             // statusStrip1
             // 
@@ -268,7 +267,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "View";
-            this.Text = "ZEISS RESULTS COLLECTOR - WEEKLY WARRANTY MEASUREMENTS";
+            this.Text = "Mc RESULTS COLLECTOR";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
