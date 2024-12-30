@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Extract_Zeiss_Results.Backend
+namespace Extract_Mc_Results.Backend
 {
     internal static class Program
     {
